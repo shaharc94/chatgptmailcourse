@@ -3,84 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>הרשמה לקורס במייל על ChatGPT</title>
+  <title>הרשמה לקורס במייל</title>
   <style>
+    :root {
+      --primary-color: #6200ea;
+      --accent-color: #03dac5;
+      --text-color: #333;
+      --bg-color: #f5f5f5;
+      --input-border: #ccc;
+    }
     body {
-      margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f3f4f6, #e0f7fa);
+      background-color: var(--bg-color);
+      margin: 0;
+      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .card {
       background: white;
       padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
       max-width: 400px;
       width: 100%;
-      text-align: center;
-      animation: fadeInUp 0.7s ease-out;
+      text-align: right;
     }
     h1 {
-      font-size: 22px;
-      color: #263238;
+      color: var(--primary-color);
       margin-bottom: 10px;
+      font-size: 24px;
     }
     p {
-      color: #546e7a;
+      color: var(--text-color);
       margin-bottom: 30px;
+      font-size: 15px;
+    }
+    label {
+      font-size: 14px;
+      color: var(--text-color);
     }
     input[type="text"], input[type="email"] {
       width: 100%;
       padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #cfd8dc;
-      border-radius: 8px;
-      font-size: 16px;
-      transition: border 0.3s;
+      margin: 8px 0 20px;
+      border: 1px solid var(--input-border);
+      border-radius: 6px;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
     }
     input:focus {
-      border-color: #00acc1;
+      border-color: var(--primary-color);
       outline: none;
     }
     button {
-      width: 100%;
-      background: #00acc1;
+      background-color: var(--primary-color);
       color: white;
-      padding: 14px;
-      font-size: 16px;
       border: none;
-      border-radius: 8px;
+      padding: 12px;
+      width: 100%;
+      border-radius: 6px;
+      font-size: 16px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background-color 0.3s;
     }
     button:hover {
-      background: #00838f;
+      background-color: #3700b3;
     }
     .success {
       display: none;
-      color: #388e3c;
-      margin-top: 20px;
-      font-weight: bold;
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      color: green;
+      text-align: center;
+      margin-top: 15px;
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>הירשמו לקורס מיילים על ChatGPT</h1>
-    <p>5 מיילים שילמדו אותך איך להפוך את ChatGPT לכלי עבודה יומיומי</p>
+    <h1>הצטרפו לקורס במייל</h1>
+    <p>קורס קצר, ברור ומעשי על שימוש חכם ב-ChatGPT בעבודה.</p>
     <form id="signup-form">
-      <input type="text" id="name" name="name" placeholder="שם מלא" required>
-      <input type="email" id="email" name="email" placeholder="כתובת אימייל" required>
+      <label for="name">שם מלא</label>
+      <input type="text" id="name" name="name" required>
+      <label for="email">אימייל</label>
+      <input type="email" id="email" name="email" required>
       <button type="submit">הרשמה</button>
-      <div class="success" id="success-message">נרשמת בהצלחה! בדוק את המייל שלך</div>
+      <div class="success" id="success-message">נרשמת בהצלחה! המייל הראשון יישלח בקרוב.</div>
     </form>
   </div>
   <script>
@@ -89,10 +104,12 @@
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
 
-      fetch('https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec', {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
         body: `name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`
       });
 
